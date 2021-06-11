@@ -8,46 +8,46 @@ package org.h2.server;
 import java.sql.SQLException;
 
 /**
- * Classes implementing this interface usually provide a
- * TCP/IP listener such as an FTP server.
- * The can be started and stopped, and may or may not
- * allow remote connections.
+ * 实现这个接口的类通常提供一个
+ * TCP/IP 侦听器，例如 FTP 服务器。
+ * 可以启动和停止，可能会也可能不会
+ * 允许远程连接。
  */
 public interface Service {
 
     /**
-     * Initialize the service from command line options.
+     * 从命令行选项初始化服务。
      *
      * @param args the command line options
      */
     void init(String... args) throws Exception;
 
     /**
-     * Get the URL of this service in a human readable form
+     * 以人类可读的形式获取此服务的 URL
      *
      * @return the url
      */
     String getURL();
 
     /**
-     * Start the service. This usually means create the server socket.
-     * This method must not block.
+     * 启动服务。 这通常意味着创建服务器套接字。
+     * 此方法不能阻塞.
      */
     void start() throws SQLException;
 
     /**
-     * Listen for incoming connections.
-     * This method blocks.
+     * 监听传入的连接。
+     * 此方法阻塞。
      */
     void listen();
 
     /**
-     * Stop the service.
+     * 停止服务。
      */
     void stop();
 
     /**
-     * Check if the service is running.
+     * 检查服务是否正在运行。
      *
      * @param traceError if errors should be written
      * @return if the server is running
@@ -55,35 +55,35 @@ public interface Service {
     boolean isRunning(boolean traceError);
 
     /**
-     * Check if remote connections are allowed.
+     * 检查是否允许远程连接。
      *
      * @return true if remote connections are allowed
      */
     boolean getAllowOthers();
 
     /**
-     * Get the human readable name of the service.
+     * 获取人类可读的服务名称。
      *
      * @return the name
      */
     String getName();
 
     /**
-     * Get the human readable short name of the service.
+     * 获取人类可读的服务短名称。
      *
      * @return the type
      */
     String getType();
 
     /**
-     * Gets the port this service is listening on.
+     * 获取此服务正在侦听的端口。
      *
      * @return the port
      */
     int getPort();
 
     /**
-     * Check if a daemon thread should be used.
+     * 检查是否应使用守护线程。
      *
      * @return true if a daemon thread should be used
      */

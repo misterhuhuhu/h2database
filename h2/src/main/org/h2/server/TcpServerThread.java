@@ -86,6 +86,8 @@ public class TcpServerThread implements Runnable {
             // and a list of allowed clients
             try {
                 Socket socket = transfer.getSocket();
+
+                //检测异常start
                 if (socket == null) {
                     // the transfer is already closed, prevent NPE in TcpServer#allow(Socket)
                     return;
@@ -93,6 +95,7 @@ public class TcpServerThread implements Runnable {
                 if (!server.allow(transfer.getSocket())) {
                     throw DbException.get(ErrorCode.REMOTE_CONNECTION_NOT_ALLOWED);
                 }
+
                 int minClientVersion = transfer.readInt();
                 if (minClientVersion < 6) {
                     throw DbException.get(ErrorCode.DRIVER_VERSION_ERROR_2,
@@ -106,6 +109,8 @@ public class TcpServerThread implements Runnable {
                     throw DbException.get(ErrorCode.DRIVER_VERSION_ERROR_2,
                             Integer.toString(minClientVersion), "" + Constants.TCP_PROTOCOL_VERSION_MAX_SUPPORTED);
                 }
+
+                //检测异常END
                 if (maxClientVersion >= Constants.TCP_PROTOCOL_VERSION_MAX_SUPPORTED) {
                     clientVersion = Constants.TCP_PROTOCOL_VERSION_MAX_SUPPORTED;
                 } else {
@@ -137,6 +142,7 @@ public class TcpServerThread implements Runnable {
                     baseDir = SysProperties.getBaseDir();
                 }
                 db = server.checkKeyAndGetDatabaseName(db);
+                //新建连接信息
                 ConnectionInfo ci = new ConnectionInfo(db);
                 ci.setOriginalURL(originalURL);
                 ci.setUserName(transfer.readString());
@@ -146,7 +152,7 @@ public class TcpServerThread implements Runnable {
                 for (int i = 0; i < len; i++) {
                     ci.setProperty(transfer.readString(), transfer.readString());
                 }
-                // override client's requested properties with server settings
+                // 使用服务器设置覆盖客户端请求的属性
                 if (baseDir != null) {
                     ci.setBaseDir(baseDir);
                 }
@@ -159,12 +165,13 @@ public class TcpServerThread implements Runnable {
                 if (ci.getFilePasswordHash() != null) {
                     ci.setFileEncryptionKey(transfer.readBytes());
                 }
+                //设置网络连接信息
                 ci.setNetworkConnectionInfo(new NetworkConnectionInfo(
                         NetUtils.ipToShortForm(new StringBuilder(server.getSSL() ? "ssl://" : "tcp://"),
-                                socket.getLocalAddress().getAddress(), true) //
-                                .append(':').append(socket.getLocalPort()).toString(), //
+                                socket.getLocalAddress().getAddress(), true)
+                                .append(':').append(socket.getLocalPort()).toString(),
                         socket.getInetAddress().getAddress(), socket.getPort(),
-                        new StringBuilder().append('P').append(clientVersion).toString()));
+                        "P" + clientVersion));
                 if (clientVersion < Constants.TCP_PROTOCOL_VERSION_20) {
                     // For DatabaseMetaData
                     ci.setProperty("OLD_INFORMATION_SCHEMA", "TRUE");

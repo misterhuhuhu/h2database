@@ -26,39 +26,39 @@ import org.h2.util.SortedProperties;
 import org.h2.util.Tool;
 
 /**
- * Small FTP Server. Intended for ad-hoc networks in a secure environment.
- * Remote connections are possible.
+ * 小型FTP服务器。 用于安全环境中的临时网络。
+ * 可以远程连接。
  * See also https://cr.yp.to/ftp.html http://www.ftpguide.com/
  */
 public class FtpServer extends Tool implements Service {
 
     /**
-     * The default port to use for the FTP server.
-     * This value is also in the documentation and in the Server javadoc.
+     * 用于 FTP 服务器的默认端口。
+     * 该值也在文档和服务器 javadoc 中。
      */
     public static final int DEFAULT_PORT = 8021;
 
     /**
-     * The default root directory name used by the FTP server.
-     * This value is also in the documentation and in the Server javadoc.
+     * FTP 服务器使用的默认根目录名称。
+     * 该值也在文档和服务器 javadoc 中。
      */
     public static final String DEFAULT_ROOT = "ftp";
 
     /**
-     * The default user name that is allowed to read data.
-     * This value is also in the documentation and in the Server javadoc.
+     * 允许读取数据的默认用户名。
+     * 该值也在文档和服务器 javadoc 中。
      */
     public static final String DEFAULT_READ = "guest";
 
     /**
-     * The default user name that is allowed to read and write data.
-     * This value is also in the documentation and in the Server javadoc.
+     * 允许读取数据的默认用户名。
+     * 该值也在文档和服务器 javadoc 中。
      */
     public static final String DEFAULT_WRITE = "sa";
 
     /**
-     * The default password of the user that is allowed to read and write data.
-     * This value is also in the documentation and in the Server javadoc.
+     * 允许读写数据的用户的默认密码。
+     * 该值也在文档和服务器 javadoc 中。
      */
     public static final String DEFAULT_WRITE_PASSWORD = "sa";
 
@@ -208,7 +208,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Close a connection. The open connection count will be decremented.
+     * 关闭连接。 打开的连接计数将递减。
      */
     void closeConnection() {
         synchronized (this) {
@@ -217,7 +217,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Create a socket to listen for incoming data connections.
+     * 创建一个套接字来侦听传入的数据连接。
      *
      * @return the server socket
      */
@@ -256,8 +256,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Get the last modified date of a date and format it as required by the FTP
-     * protocol.
+     * 获取一个日期的最后修改日期并按照FTP的要求对其进行格式化协议。
      *
      * @param fileName the file name
      * @return the last modified date of this file
@@ -269,7 +268,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Get the full file name of this relative path.
+     * 获取此相对路径的完整文件名。
      *
      * @param path the relative path
      * @return the file name
@@ -293,7 +292,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Get the directory listing for this directory.
+     * 获取此目录的目录列表。
      *
      * @param directory the directory to list
      * @param listDirectories if sub-directories should be listed
@@ -311,7 +310,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Check if this user name is allowed to write.
+     * 检查这个用户名是否允许写入。
      *
      * @param userName the user name
      * @param password the password
@@ -323,7 +322,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Check if this user name is allowed to read.
+     * 检查此用户名是否允许读取。
      *
      * @param userName the user name
      * @return true if this user may read
@@ -418,7 +417,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Write trace information if trace is enabled.
+     * 如果启用了跟踪，则写入跟踪信息。
      *
      * @param s the message to write
      */
@@ -429,7 +428,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Write the stack trace if trace is enabled.
+     * 如果启用了跟踪，则写入堆栈跟踪。
      *
      * @param e the exception
      */
@@ -444,7 +443,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Start a task.
+     * 开启任务(用于备份)
      *
      * @param path the name of the task file
      */
@@ -471,6 +470,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
+     * @deprecated  无用
      * This class re-directs an input stream to a file.
      */
     private static class StreamRedirect extends Thread {
@@ -519,7 +519,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Stop a running task.
+     * 停止任务(停止备份)
      *
      * @param processName the task name
      */
@@ -533,7 +533,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Set the event listener. Only one listener can be registered.
+     * 设置事件监听器。 只能注册一个监听器。
      *
      * @param eventListener the new listener, or null to de-register
      */
@@ -542,7 +542,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Get the registered event listener.
+     * 获取注册的事件监听器。
      *
      * @return the event listener, or null if non is registered
      */
@@ -551,7 +551,7 @@ public class FtpServer extends Tool implements Service {
     }
 
     /**
-     * Create a new FTP server, but does not start it yet. Example:
+     * 创建一个新的 FTP 服务器，但尚未启动它。Example:
      *
      * <pre>
      * Server server = FtpServer.createFtpServer(null).start();

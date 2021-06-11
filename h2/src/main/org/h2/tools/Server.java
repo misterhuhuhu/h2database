@@ -22,8 +22,7 @@ import org.h2.util.Tool;
 import org.h2.util.Utils;
 
 /**
- * Starts the H2 Console (web-) server, TCP, and PG server.
- * @h2.resource
+ * 启动 H2 Console (web-) 服务器、TCP 和 PG 服务器。
  */
 public class Server extends Tool implements Runnable, ShutdownHandler {
 

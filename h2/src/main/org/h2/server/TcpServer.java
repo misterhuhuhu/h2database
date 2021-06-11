@@ -251,6 +251,7 @@ public class TcpServer implements Service {
         try {
             while (!stop) {
                 Socket s = serverSocket.accept();
+                //setTcpQuickack()未实现
                 Utils10.setTcpQuickack(s, true);
                 int id = nextThreadId++;
                 TcpServerThread c = new TcpServerThread(s, this, id);
@@ -375,7 +376,7 @@ public class TcpServer implements Service {
     }
 
     /**
-     * Get the configured base directory.
+     * 获取配置的基目录。
      *
      * @return the base directory
      */
@@ -488,9 +489,9 @@ public class TcpServer implements Service {
     }
 
     /**
-     * If no key is set, return the original database name. If a key is set,
-     * check if the key matches. If yes, return the correct database name. If
-     * not, throw an exception.
+     * 如果没有设置key，则返回原始数据库名称。 如果设置了一个键，
+     * 检查密钥是否匹配。 如果是，则返回正确的数据库名称。 如果
+     * 不是，抛出异常。
      *
      * @param db the key to test (or database name if no key is used)
      * @return the database name
