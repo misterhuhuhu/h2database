@@ -48,8 +48,8 @@ import org.h2.value.ValueTimestampTimeZone;
 import org.h2.value.ValueVarchar;
 
 /**
- * The client side part of a session when using the server mode. This object
- * communicates with a Session on the server side.
+ * 使用服务器模式时会话的客户端部分。 这个对象
+ * 与服务器端的 Session 通信。
  */
 public final class SessionRemote extends Session implements DataHandler {
 

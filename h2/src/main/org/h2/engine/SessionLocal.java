@@ -66,9 +66,9 @@ import org.h2.value.lob.LobDataDatabase;
 import org.h2.value.lob.LobDataInMemory;
 
 /**
- * A session represents an embedded database connection. When using the server
- * mode, this object resides on the server side and communicates with a
- * SessionRemote object on the client side.
+ * 一个会话代表一个嵌入式数据库连接。 使用服务器时
+ * 模式，此对象驻留在服务器端并与
+ * 客户端的 SessionRemote 对象。
  */
 public final class SessionLocal extends Session implements TransactionStore.RollbackListener {
 
